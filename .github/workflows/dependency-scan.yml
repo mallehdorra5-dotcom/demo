@@ -20,9 +20,8 @@ jobs:
           path: "."
           format: "ALL"
           out: "dependency-check-report"
-          args: >
-            --scan .
-            --enableRetired
+         args: >
+           --enableRetired
 
       - name: Upload Dependency-Check report
         uses: actions/upload-artifact@v4
