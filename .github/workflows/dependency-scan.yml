@@ -18,7 +18,7 @@ jobs:
         with:
           project: "Spring Boot Demo"
           path: "."
-          format: "HTML"
+          format: "ALL"
           out: "dependency-check-report"
           args: >
             --scan .
