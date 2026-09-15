@@ -18,4 +18,4 @@ jobs:
           docker run --rm \
             -v "$PWD:/src" \
             semgrep/semgrep \
-            semgrep scan --config auto /srccd 
+            semgrep scan --config auto /src
