@@ -23,3 +23,10 @@ jobs:
           args: >
             --scan .
             --enableRetired
+
+      - name: Upload Dependency-Check report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dependency-check-report
+          path: dependency-check-report
