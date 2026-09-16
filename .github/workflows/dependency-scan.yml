@@ -13,6 +13,15 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Build project with Maven
+        run: ./mvnw clean install -DskipTests
+
       - name: Run OWASP Dependency-Check
         uses: dependency-check/Dependency-Check_Action@main
         with:
@@ -20,8 +29,8 @@ jobs:
           path: "."
           format: "ALL"
           out: "dependency-check-report"
-         args: >
-           --enableRetired
+          args: >
+            --enableRetired
 
       - name: Upload Dependency-Check report
         uses: actions/upload-artifact@v4
