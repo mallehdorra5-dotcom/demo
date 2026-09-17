@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout source code
-       uses: actions/checkout@11d5960e1a9b1e8a4f1e9e9c6f0d8e8f7c6b5a4
+        uses: actions/checkout@v4
 
       - name: Source Code Vulnerability Scan
         run: |
