@@ -33,4 +33,5 @@ jobs:
             --network host \
             ghcr.io/zaproxy/zaproxy:stable \
             zap-baseline.py \
-            -t http://localhost:8080/hello
+            -t http://localhost:8080/hello \
+            -I
