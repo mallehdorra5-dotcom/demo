@@ -33,6 +33,8 @@ jobs:
           out: "dependency-check-report"
           args: >
             --enableRetired
+            --connectiontimeout 60000
+            --readtimeout 180000
 
       - name: Upload Dependency-Check report
         uses: actions/upload-artifact@v4
