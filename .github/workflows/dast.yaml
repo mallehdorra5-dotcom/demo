@@ -1,0 +1,36 @@
+name: DAST - OWASP ZAP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dast:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Start Spring Boot application
+        run: |
+          nohup ./mvnw spring-boot:run > app.log 2>&1 &
+          sleep 30
+
+      - name: Check application
+        run: curl -f http://localhost:8080/hello
+
+      - name: Run OWASP ZAP
+        run: |
+          docker run --rm \
+            --network host \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py \
+            -t http://localhost:8080/hello
