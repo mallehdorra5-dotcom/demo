@@ -9,6 +9,10 @@ jobs:
   sast:
     runs-on: ubuntu-latest
 
+    permissions:
+      security-events: write
+      contents: read
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -18,4 +22,14 @@ jobs:
           docker run --rm \
             -v "$PWD:/src" \
             semgrep/semgrep \
-            semgrep scan --config auto /src
+            semgrep scan \
+            --config auto \
+            --sarif \
+            --output /src/semgrep.sarif \
+            /src
+
+      - name: Upload Semgrep SARIF
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep.sarif
